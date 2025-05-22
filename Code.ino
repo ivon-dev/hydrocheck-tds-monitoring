@@ -57,7 +57,7 @@ void loop() {
 
     Serial.print("Temperature: ");
     Serial.print(temperature, 1);
-    Serial.println(" C");
+    Serial.println(" °C");
 
     Serial.print("TDS Value: ");
     Serial.print(tdsValue, 0);
@@ -72,7 +72,7 @@ void loop() {
     sprintf(lcdLine1, "TDS: %04d PPM", (int)tdsValue);
 
     // Format temperature with leading zeros (2 digits)
-    sprintf(lcdLine2, "Temp: %02d \xDFC", (int)temperature);
+    sprintf(lcdLine2, "Temp: %02d C", (int)temperature);
 
     lcd.setCursor(0, 0);
     lcd.print(lcdLine1);
