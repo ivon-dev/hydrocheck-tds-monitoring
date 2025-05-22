@@ -57,7 +57,7 @@ void loop() {
 
     Serial.print("Temperature: ");
     Serial.print(temperature, 1);
-    Serial.println(" °C");
+    Serial.println(" C");
 
     Serial.print("TDS Value: ");
     Serial.print(tdsValue, 0);
