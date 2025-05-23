@@ -1,11 +1,11 @@
-#include <LiquidCrystal_I2C.h> // Library for LCD
-LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C address 0x27, 16 columns and 2 rows
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 #define TdsSensorPin A1
-#define VREF 5.0      // Analog reference voltage (Volt) of the ADC
-#define SCOUNT 30     // Number of sample points
+#define VREF 5.0
+#define SCOUNT 30
 
-int analogBuffer[SCOUNT];    // Store the analog values read from ADC
+int analogBuffer[SCOUNT];
 int analogBufferTemp[SCOUNT];
 int analogBufferIndex = 0, copyIndex = 0;
 
@@ -14,10 +14,9 @@ float averageVoltage = 0, tdsValue = 0, temperature = 25;
 void setup() {
   Serial.begin(9600);
   pinMode(TdsSensorPin, INPUT);
-  lcd.init(); // Initialize the LCD
+  lcd.init();
   lcd.backlight();
 
-  // Print the monitoring start header once
   Serial.println("-- MONITORING START --");
   Serial.println("---------------------------");
 }
@@ -46,7 +45,6 @@ void loop() {
                 - 255.86 * compensationVoltage * compensationVoltage
                 + 857.39 * compensationVoltage) * 0.5;
 
-    // Serial Monitor Output
     Serial.print("Raw Voltage: ");
     Serial.print(averageVoltage, 2);
     Serial.println(" V");
@@ -64,14 +62,11 @@ void loop() {
     Serial.println(" ppm");
     Serial.println("---------------------------");
 
-    // LCD Display
-    char lcdLine1[17]; // 16 characters + null terminator
+    char lcdLine1[17];
     char lcdLine2[17];
 
-    // Format TDS value with leading zeros (4 digits)
     sprintf(lcdLine1, "TDS: %04d PPM", (int)tdsValue);
 
-    // Format temperature with leading zeros (2 digits)
     sprintf(lcdLine2, "Temp: %02d C", (int)temperature);
 
     lcd.setCursor(0, 0);
